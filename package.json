@@ -1,0 +1,38 @@
+{
+  "name": "neutrino-webextension",
+  "version": "0.1.0",
+  "description": "Neutrino middleware for WebExtension development which supports framework devtools.",
+  "keywords": [
+    "neutrino",
+    "preset",
+    "middleware",
+    "webextension",
+    "extension",
+    "devtool"
+  ],
+  "author": "CRIMX",
+  "homepage": "https://github.com/crimx/neutrino-webextension#readme",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/crimx/neutrino-webextension.git"
+  },
+  "bugs": {
+    "url": "https://github.com/crimx/neutrino-webextension/issues"
+  },
+  "engines": {
+    "node": "^8.10 || >=10",
+    "npm": ">=5.4.0",
+    "yarn": ">=1.2.1"
+  },
+  "main": "index.js",
+  "dependencies": {
+    "deepmerge": "^3.3.0",
+    "fs-extra": "^8.0.1"
+  },
+  "peerDependencies": {
+    "neutrino": "^9.0.0-rc.3",
+    "webpack": "^4.0.0",
+    "webpack-cli": "^3.0.0"
+  }
+}
