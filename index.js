@@ -37,5 +37,5 @@ module.exports = (opts = {}) => neutrino => {
 
   neutrino.config
     .plugin('webext')
-    .use(WexExtManifestPlugin, [options, neutrino])
+    .use(WexExtManifestPlugin, [options, neutrino.options])
 }
