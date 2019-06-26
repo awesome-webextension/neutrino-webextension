@@ -1,7 +1,7 @@
 {
   "name": "neutrino-webextension",
   "version": "0.1.0",
-  "description": "Neutrino middleware for WebExtension development which supports framework devtools.",
+  "description": "Neutrino 9 preset for WebExtension development which supports framework devtools.",
   "keywords": [
     "neutrino",
     "preset",
@@ -28,10 +28,14 @@
   "main": "index.js",
   "dependencies": {
     "deepmerge": "^3.3.0",
-    "fs-extra": "^8.0.1"
+    "fs-extra": "^8.0.1",
+    "sinon-chrome": "^3.0.1",
+    "webextensions-emulator": "^2.0.0",
+    "yargs-parser": "^13.1.1"
   },
   "peerDependencies": {
     "neutrino": "^9.0.0-rc.3",
+    "webextension-polyfill": ">=0.4.0",
     "webpack": "^4.0.0",
     "webpack-cli": "^3.0.0"
   }
