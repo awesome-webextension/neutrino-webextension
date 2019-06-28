@@ -26,6 +26,9 @@
     "yarn": ">=1.2.1"
   },
   "main": "lib/index.js",
+  "bin": {
+    "neutrino-webextension-zip": "./lib/zip.js"
+  },
   "files": [
     "lib/**/*",
     "template.dev.ejs",
