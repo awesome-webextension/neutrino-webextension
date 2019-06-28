@@ -1,6 +1,6 @@
 # neutrino-webextension
 
-Neutrino 9 preset for WebExtension development which supports framework devtools.
+Neutrino 9 preset for WebExtension development with hot reload and framework devtools.
 
 ## Features
 
