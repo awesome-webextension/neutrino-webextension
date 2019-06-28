@@ -48,7 +48,8 @@ This preset follows the standard [project layout](https://neutrinojs.org/project
 src/manifest/
 ├── chrome.manifest.json
 ├── common.manifest.json
-└── firefox.manifest.json
+├── firefox.manifest.json
+└── [other browser].manifest.json
 ```
 
 Add this preset and your entries in `.neutrinorc.js`. Example:
@@ -113,7 +114,9 @@ This preset is designed to work with [eslint](https://github.com/neutrinojs/neut
 This preset should be placed ***after*** all other presets.
 
 
-### Development
+## Development
+
+Follow instructions of other presets. Typically:
 
 ```
 yarn start
@@ -131,17 +134,47 @@ Or just keep one entry for faster bundling:
 yarn start --wextentry [entry name]
 ```
 
+## Production
+
+Follow instructions of other presets.
+
+## Deployment
+
+You can either pack zip files and manually upload via websites or use CLI tools.
+
+### Zip & Upload Manually
+
+Add `"zip": yarn neutrino-webextension-zip"` to package.json scripts.
+
+```
+yarn zip
+```
+
+Zip files for project source and each browser are generated at Neutrino [`output`](https://neutrinojs.org/customization/#optionsoutput) directory.
+
+Source zip respects `.gitignore` by default. If you want to add or remove files, pass any number of [glob patterns](https://github.com/mrmlnc/fast-glob#pattern-syntax) as arguments. Negative patterns must come first, then normal patterns. For example:
+
+```
+yarn neutrino-webextension-zip '!test/specs/**/*' '.env'
+```
+
+### CLI Tools
+
+See [wext-shipit](https://github.com/LinusU/wext-shipit) which is based on [web-ext](https://www.npmjs.com/package/web-ext) and [chrome-webstore-upload-cli](https://www.npmjs.com/package/chrome-webstore-upload-cli).
+
+
+## Testing
+
+Use [`sinon-chrome`](https://github.com/acvetkov/sinon-chrome) which supports Chrome and Firefox API stubs.
 
 ## Preset Options
 
 All options are optional.
 
-- `polyfill`: boolean. Default `false`. Generate polyfill related configs. If `true` you should also install the polyfll.
-  ```
-  yarn add webextension-polyfill
-  ```
+- `polyfill`: boolean. Default `false`. Generate polyfill related configs. If `true` you should also install the `webextension-polyfill` polyfll.
 - `manifest`: string. Default `'<project_root>/src/manifest/'`. Extensions' manifests directory.
   - This directory should have at least a `common.manifest.json` and `[browser].manifest.json` (e.g. `firefox.manifest.json`). This preset will read this directory to get browser names and generate outputs respectively.
+  - Version number is copied from package.json by default. If you specify `version` field on any manifest.json it will overwrite the default. This is not recommended. You should just perform sematic updates on package.json to avoid confusion. See [standard-version](https://www.npmjs.com/package/standard-version) for example.
 - `template`: string. Default [`<neutrino-webextension_root>/template.ejs`](./template.ejs). Path to a special template for html-webpack-plugin. You normally don't have to change this. The html-webpack-plugin can be configured through [web](https://github.com/neutrinojs/neutrino/blob/master/packages/web/README.md#preset-options) preset or other Neutrino presets that based on web (e.g [react](https://github.com/neutrinojs/neutrino/blob/master/packages/react/README.md#advanced-configuration)). If you really need to replace the template, copy [template.ejs](./template.ejs) and make your own.
 
 ## Entry Options
