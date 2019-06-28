@@ -55,8 +55,9 @@ module.exports = {
     }),
     karma(),
     webext({
+      polyfill: true,
       manifest: 'test/src/manifest',
-      polyfill: true
+      setup: 'test/setup'
     })
   ]
 }
