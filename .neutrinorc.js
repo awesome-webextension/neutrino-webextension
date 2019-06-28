@@ -27,6 +27,7 @@ module.exports = {
         entry: 'src/content1',
         webext: {
           type: 'content_scripts',
+          setup: 'src/content1/__dev__/setup',
           manifest: {
             matches: ['<all_urls>']
           }
