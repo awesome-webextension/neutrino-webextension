@@ -4,7 +4,6 @@
 
 const standard = require('@neutrinojs/standardjs')
 const react = require('@neutrinojs/react')
-const karma = require('@neutrinojs/karma')
 const webext = require('./lib')
 
 module.exports = {
@@ -54,7 +53,6 @@ module.exports = {
         title: 'neutrino-webextension'
       }
     }),
-    karma(),
     webext({
       polyfill: true,
       manifest: 'test/src/manifest',
