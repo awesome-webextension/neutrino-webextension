@@ -185,7 +185,7 @@ Use [`sinon-chrome`](https://github.com/acvetkov/sinon-chrome) which supports Ch
 
 All options are optional.
 
-- `polyfill`: boolean. Default `false`. Generate polyfill related configs. If `true` you should also install the `webextension-polyfill` polyfll.
+- `polyfill`: boolean or string. Default `false`. Generate polyfill related configs. If `true` the `webextension-polyfill` should be installed. You can alos provide path to a custom polyfill file.
 - `manifest`: string. Default `'<neutrino.options.root>/src/manifest/'`. Extension manifests directory.
   - This directory should have at least a `common.manifest.json` and `[browser].manifest.json` (e.g. `firefox.manifest.json`). This preset will read this directory to get browser names and generate outputs respectively.
   - Version number is copied from package.json by default. If you specify `version` field on any manifest.json it will overwrite the default. This is not recommended. You should just perform sematic updates on package.json to avoid confusion. See [standard-version](https://www.npmjs.com/package/standard-version) for example.

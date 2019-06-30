@@ -4,23 +4,19 @@ exports[`webpack development snapshots entries with polyfill 1`] = `
 Object {
   "background": Array [
     "/home/crimx/code/neutrino-webextension/node_modules/webextensions-emulator/dist/background.js",
-    "webextension-polyfill",
     "/home/crimx/code/neutrino-webextension/test/src/background",
   ],
   "content1": Array [
     "/home/crimx/code/neutrino-webextension/node_modules/webextensions-emulator/dist/core.js",
-    "webextension-polyfill",
     "/home/crimx/code/neutrino-webextension/test/src/content1/__dev__/setup",
     "/home/crimx/code/neutrino-webextension/test/src/content1",
   ],
   "content2": Array [
     "/home/crimx/code/neutrino-webextension/node_modules/webextensions-emulator/dist/core.js",
-    "webextension-polyfill",
     "/home/crimx/code/neutrino-webextension/test/src/content2",
   ],
   "popup": Array [
     "/home/crimx/code/neutrino-webextension/node_modules/webextensions-emulator/dist/core.js",
-    "webextension-polyfill",
     "/home/crimx/code/neutrino-webextension/test/src/popup",
   ],
 }
