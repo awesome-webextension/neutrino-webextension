@@ -15,6 +15,14 @@ Object {
     "/home/crimx/code/neutrino-webextension/node_modules/webextensions-emulator/dist/core.js",
     "/home/crimx/code/neutrino-webextension/test/src/content2",
   ],
+  "page": Array [
+    "/home/crimx/code/neutrino-webextension/node_modules/webextensions-emulator/dist/core.js",
+    "/home/crimx/code/neutrino-webextension/test/src/page",
+  ],
+  "pageless": Array [
+    "/home/crimx/code/neutrino-webextension/node_modules/webextensions-emulator/dist/core.js",
+    "/home/crimx/code/neutrino-webextension/test/src/pageless",
+  ],
   "popup": Array [
     "/home/crimx/code/neutrino-webextension/node_modules/webextensions-emulator/dist/core.js",
     "/home/crimx/code/neutrino-webextension/test/src/popup",
@@ -37,6 +45,14 @@ Object {
     "/home/crimx/code/neutrino-webextension/node_modules/webextensions-emulator/dist/core.js",
     "/home/crimx/code/neutrino-webextension/test/src/content2",
   ],
+  "page": Array [
+    "/home/crimx/code/neutrino-webextension/node_modules/webextensions-emulator/dist/core.js",
+    "/home/crimx/code/neutrino-webextension/test/src/page",
+  ],
+  "pageless": Array [
+    "/home/crimx/code/neutrino-webextension/node_modules/webextensions-emulator/dist/core.js",
+    "/home/crimx/code/neutrino-webextension/test/src/pageless",
+  ],
   "popup": Array [
     "/home/crimx/code/neutrino-webextension/node_modules/webextensions-emulator/dist/core.js",
     "/home/crimx/code/neutrino-webextension/test/src/popup",
@@ -55,13 +71,19 @@ Object {
   "content2": Array [
     "/home/crimx/code/neutrino-webextension/test/src/content2",
   ],
+  "page": Array [
+    "/home/crimx/code/neutrino-webextension/test/src/page",
+  ],
+  "pageless": Array [
+    "/home/crimx/code/neutrino-webextension/test/src/pageless",
+  ],
   "popup": Array [
     "/home/crimx/code/neutrino-webextension/test/src/popup",
   ],
 }
 `;
 
-exports[`webpack production snapshots entries without polyfill 1`] = `
+exports[`webpack production snapshots entries without polyfill(should not be injected) 1`] = `
 Object {
   "background": Array [
     "/home/crimx/code/neutrino-webextension/test/src/background",
@@ -71,6 +93,12 @@ Object {
   ],
   "content2": Array [
     "/home/crimx/code/neutrino-webextension/test/src/content2",
+  ],
+  "page": Array [
+    "/home/crimx/code/neutrino-webextension/test/src/page",
+  ],
+  "pageless": Array [
+    "/home/crimx/code/neutrino-webextension/test/src/pageless",
   ],
   "popup": Array [
     "/home/crimx/code/neutrino-webextension/test/src/popup",

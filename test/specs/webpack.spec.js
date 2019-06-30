@@ -24,6 +24,13 @@ describe('webpack', () => {
         testEntriesSnapshot(true)
       })
     })
+
+    test('should not have webext plugin', () => {
+      const neutrino = new Neutrino(optionsFixture())
+      neutrino.use(react())
+      neutrino.use(webext())
+      expect(neutrino.config.plugins.has('webext')).toBeFalsy()
+    })
   })
 
   describe('production', () => {
@@ -32,12 +39,70 @@ describe('webpack', () => {
     })
 
     describe('snapshots', () => {
-      test('entries without polyfill', () => {
+      test('entries without polyfill(should not be injected)', () => {
         testEntriesSnapshot()
       })
 
       test('entries with polyfill(should also not be injected)', () => {
         testEntriesSnapshot(true)
+      })
+    })
+
+    test('should have webext plugin', () => {
+      const neutrino = new Neutrino(optionsFixture())
+      neutrino.use(react())
+      neutrino.use(webext())
+      expect(neutrino.config.plugins.has('webext')).toBeTruthy()
+    })
+
+    test('should not inject polyfill if polyfill options is off', () => {
+      const neutrino = new Neutrino(optionsFixture())
+      neutrino.use(react())
+      neutrino.use(webext())
+      expect(neutrino.config.plugins.has('html-background')).toBeFalsy()
+      expect(neutrino.config.plugins.has('html-pageless')).toBeFalsy()
+      expect(neutrino.config.plugins.has('html-content1')).toBeFalsy()
+      expect(neutrino.config.plugins.has('html-content2')).toBeFalsy()
+      neutrino.config.plugin('html-popup').tap(argv => {
+        expect(argv[0].webextPolyfill).toBeFalsy()
+        return argv
+      })
+      neutrino.config.plugin('html-page').tap(argv => {
+        expect(argv[0].webextPolyfill).toBeFalsy()
+        return argv
+      })
+    })
+
+    test('should inject polyfill if polyfill options is on', () => {
+      const neutrino = new Neutrino(optionsFixture())
+      neutrino.use(react())
+      neutrino.use(
+        webext({
+          polyfill: 'polyfill-path',
+          template: 'template-path'
+        })
+      )
+      expect(neutrino.config.plugins.has('html-background')).toBeFalsy()
+      expect(neutrino.config.plugins.has('html-pageless')).toBeFalsy()
+      expect(neutrino.config.plugins.has('html-content1')).toBeFalsy()
+      expect(neutrino.config.plugins.has('html-content2')).toBeFalsy()
+      neutrino.config.plugin('html-popup').tap(argv => {
+        expect(argv[0].webextPolyfill).toBe(
+          path.join(neutrino.options.root, 'polyfill-path')
+        )
+        expect(argv[0].template).toBe(
+          path.join(neutrino.options.root, 'template-path')
+        )
+        return argv
+      })
+      neutrino.config.plugin('html-page').tap(argv => {
+        expect(argv[0].webextPolyfill).toBe(
+          path.join(neutrino.options.root, 'polyfill-path')
+        )
+        expect(argv[0].template).toBe(
+          path.join(neutrino.options.root, 'template-path')
+        )
+        return argv
       })
     })
   })
@@ -68,6 +133,18 @@ function optionsFixture () {
         entry: 'popup',
         webext: {
           type: 'browser_action'
+        }
+      },
+      page: {
+        entry: 'page',
+        webext: {
+          type: 'page'
+        }
+      },
+      pageless: {
+        entry: 'pageless',
+        webext: {
+          type: 'pageless'
         }
       },
       content1: {
