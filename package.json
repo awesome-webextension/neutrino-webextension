@@ -37,7 +37,8 @@
   ],
   "scripts": {
     "start": "webpack-dev-server --mode development --open",
-    "build": "webpack --mode production"
+    "build": "webpack --mode production",
+    "test": "jest --coverage"
   },
   "dependencies": {
     "archiver": "^3.0.0",
@@ -49,10 +50,10 @@
     "yargs-parser": "^13.1.1"
   },
   "devDependencies": {
-    "@neutrinojs/karma": "^9.0.0-rc.3",
     "@neutrinojs/react": "^9.0.0-rc.3",
     "@neutrinojs/standardjs": "^9.0.0-rc.3",
     "eslint": "^5",
+    "jest": "^24.8.0",
     "neutrino": "^9.0.0-rc.3",
     "react": "^16",
     "react-dom": "^16",
