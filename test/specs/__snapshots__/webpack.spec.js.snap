@@ -1,31 +1,49 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`webpack development should add global and entry setup files 1`] = `
+Array [
+  "/home/crimx/code/neutrino-webextension/node_modules/webextensions-emulator/dist/core.js",
+  "/global-setup-path",
+  "/entry-setup-path",
+  "/project/src/index",
+]
+`;
+
+exports[`webpack development should resolve relative setup path 1`] = `
+Array [
+  "/home/crimx/code/neutrino-webextension/node_modules/webextensions-emulator/dist/core.js",
+  "/project/global-setup-path",
+  "/project/src/entry-setup-path",
+  "/project/src/index",
+]
+`;
+
 exports[`webpack development snapshots entries with polyfill 1`] = `
 Object {
   "background": Array [
     "/home/crimx/code/neutrino-webextension/node_modules/webextensions-emulator/dist/background.js",
-    "/home/crimx/code/neutrino-webextension/test/src/background",
+    "/project/src/background",
   ],
   "content1": Array [
     "/home/crimx/code/neutrino-webextension/node_modules/webextensions-emulator/dist/core.js",
-    "/home/crimx/code/neutrino-webextension/test/src/content1/__dev__/setup",
-    "/home/crimx/code/neutrino-webextension/test/src/content1",
+    "/project/src/content1/__dev__/setup",
+    "/project/src/content1",
   ],
   "content2": Array [
     "/home/crimx/code/neutrino-webextension/node_modules/webextensions-emulator/dist/core.js",
-    "/home/crimx/code/neutrino-webextension/test/src/content2",
+    "/project/src/content2",
   ],
   "page": Array [
     "/home/crimx/code/neutrino-webextension/node_modules/webextensions-emulator/dist/core.js",
-    "/home/crimx/code/neutrino-webextension/test/src/page",
+    "/project/src/page",
   ],
   "pageless": Array [
     "/home/crimx/code/neutrino-webextension/node_modules/webextensions-emulator/dist/core.js",
-    "/home/crimx/code/neutrino-webextension/test/src/pageless",
+    "/project/src/pageless",
   ],
   "popup": Array [
     "/home/crimx/code/neutrino-webextension/node_modules/webextensions-emulator/dist/core.js",
-    "/home/crimx/code/neutrino-webextension/test/src/popup",
+    "/project/src/popup",
   ],
 }
 `;
@@ -34,28 +52,28 @@ exports[`webpack development snapshots entries without polyfill 1`] = `
 Object {
   "background": Array [
     "/home/crimx/code/neutrino-webextension/node_modules/webextensions-emulator/dist/background.js",
-    "/home/crimx/code/neutrino-webextension/test/src/background",
+    "/project/src/background",
   ],
   "content1": Array [
     "/home/crimx/code/neutrino-webextension/node_modules/webextensions-emulator/dist/core.js",
-    "/home/crimx/code/neutrino-webextension/test/src/content1/__dev__/setup",
-    "/home/crimx/code/neutrino-webextension/test/src/content1",
+    "/project/src/content1/__dev__/setup",
+    "/project/src/content1",
   ],
   "content2": Array [
     "/home/crimx/code/neutrino-webextension/node_modules/webextensions-emulator/dist/core.js",
-    "/home/crimx/code/neutrino-webextension/test/src/content2",
+    "/project/src/content2",
   ],
   "page": Array [
     "/home/crimx/code/neutrino-webextension/node_modules/webextensions-emulator/dist/core.js",
-    "/home/crimx/code/neutrino-webextension/test/src/page",
+    "/project/src/page",
   ],
   "pageless": Array [
     "/home/crimx/code/neutrino-webextension/node_modules/webextensions-emulator/dist/core.js",
-    "/home/crimx/code/neutrino-webextension/test/src/pageless",
+    "/project/src/pageless",
   ],
   "popup": Array [
     "/home/crimx/code/neutrino-webextension/node_modules/webextensions-emulator/dist/core.js",
-    "/home/crimx/code/neutrino-webextension/test/src/popup",
+    "/project/src/popup",
   ],
 }
 `;
@@ -63,22 +81,22 @@ Object {
 exports[`webpack production snapshots entries with polyfill(should also not be injected) 1`] = `
 Object {
   "background": Array [
-    "/home/crimx/code/neutrino-webextension/test/src/background",
+    "/project/src/background",
   ],
   "content1": Array [
-    "/home/crimx/code/neutrino-webextension/test/src/content1",
+    "/project/src/content1",
   ],
   "content2": Array [
-    "/home/crimx/code/neutrino-webextension/test/src/content2",
+    "/project/src/content2",
   ],
   "page": Array [
-    "/home/crimx/code/neutrino-webextension/test/src/page",
+    "/project/src/page",
   ],
   "pageless": Array [
-    "/home/crimx/code/neutrino-webextension/test/src/pageless",
+    "/project/src/pageless",
   ],
   "popup": Array [
-    "/home/crimx/code/neutrino-webextension/test/src/popup",
+    "/project/src/popup",
   ],
 }
 `;
@@ -86,22 +104,22 @@ Object {
 exports[`webpack production snapshots entries without polyfill(should not be injected) 1`] = `
 Object {
   "background": Array [
-    "/home/crimx/code/neutrino-webextension/test/src/background",
+    "/project/src/background",
   ],
   "content1": Array [
-    "/home/crimx/code/neutrino-webextension/test/src/content1",
+    "/project/src/content1",
   ],
   "content2": Array [
-    "/home/crimx/code/neutrino-webextension/test/src/content2",
+    "/project/src/content2",
   ],
   "page": Array [
-    "/home/crimx/code/neutrino-webextension/test/src/page",
+    "/project/src/page",
   ],
   "pageless": Array [
-    "/home/crimx/code/neutrino-webextension/test/src/pageless",
+    "/project/src/pageless",
   ],
   "popup": Array [
-    "/home/crimx/code/neutrino-webextension/test/src/popup",
+    "/project/src/popup",
   ],
 }
 `;

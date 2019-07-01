@@ -31,6 +31,75 @@ describe('webpack', () => {
       neutrino.use(webext())
       expect(neutrino.config.plugins.has('webext')).toBeFalsy()
     })
+
+    test('should add global and entry setup files', () => {
+      const neutrino = new Neutrino({
+        root: '/project',
+        source: '/project/src',
+        mains: {
+          index: {
+            entry: 'index',
+            webext: {
+              type: 'browser_action',
+              setup: '/entry-setup-path'
+            }
+          }
+        }
+      })
+      neutrino.use(react())
+      neutrino.use(
+        webext({
+          setup: '/global-setup-path'
+        })
+      )
+      expect(neutrino.config.entry('index').values()).toMatchSnapshot()
+    })
+
+    test('should resolve relative setup path', () => {
+      const neutrino = new Neutrino({
+        root: '/project',
+        source: '/project/src',
+        mains: {
+          index: {
+            entry: 'index',
+            webext: {
+              type: 'browser_action',
+              setup: 'entry-setup-path'
+            }
+          }
+        }
+      })
+      neutrino.use(react())
+      neutrino.use(
+        webext({
+          setup: 'global-setup-path'
+        })
+      )
+      expect(neutrino.config.entry('index').values()).toMatchSnapshot()
+    })
+
+    describe('wextentry cli option', () => {
+      test('other entries except background should be removed', () => {
+        const bakArgv = process.argv
+        process.argv = ['yarn', 'start', '--wextentry', 'popup']
+        const neutrino = new Neutrino(optionsFixture())
+        neutrino.use(react())
+        neutrino.use(webext())
+        expect(neutrino.config.entryPoints.has('background')).toBeTruthy()
+        expect(neutrino.config.entryPoints.has('popup')).toBeTruthy()
+        expect(neutrino.config.plugins.has('html-popup')).toBeTruthy()
+        expect(neutrino.config.entryPoints.has('page')).toBeFalsy()
+        expect(neutrino.config.plugins.has('html-page')).toBeFalsy()
+        expect(neutrino.config.entryPoints.has('pageless')).toBeFalsy()
+        expect(neutrino.config.plugins.has('html-pageless')).toBeFalsy()
+        expect(neutrino.config.entryPoints.has('content1')).toBeFalsy()
+        expect(neutrino.config.plugins.has('html-content1')).toBeFalsy()
+        expect(neutrino.config.entryPoints.has('content2')).toBeFalsy()
+        expect(neutrino.config.plugins.has('html-content2')).toBeFalsy()
+
+        process.argv = bakArgv
+      })
+    })
   })
 
   describe('production', () => {
@@ -63,14 +132,6 @@ describe('webpack', () => {
       expect(neutrino.config.plugins.has('html-pageless')).toBeFalsy()
       expect(neutrino.config.plugins.has('html-content1')).toBeFalsy()
       expect(neutrino.config.plugins.has('html-content2')).toBeFalsy()
-      neutrino.config.plugin('html-popup').tap(argv => {
-        expect(argv[0].webextPolyfill).toBeFalsy()
-        return argv
-      })
-      neutrino.config.plugin('html-page').tap(argv => {
-        expect(argv[0].webextPolyfill).toBeFalsy()
-        return argv
-      })
     })
 
     test('should inject polyfill if polyfill options is on', () => {
@@ -86,24 +147,6 @@ describe('webpack', () => {
       expect(neutrino.config.plugins.has('html-pageless')).toBeFalsy()
       expect(neutrino.config.plugins.has('html-content1')).toBeFalsy()
       expect(neutrino.config.plugins.has('html-content2')).toBeFalsy()
-      neutrino.config.plugin('html-popup').tap(argv => {
-        expect(argv[0].webextPolyfill).toBe(
-          path.join(neutrino.options.root, 'polyfill-path')
-        )
-        expect(argv[0].template).toBe(
-          path.join(neutrino.options.root, 'template-path')
-        )
-        return argv
-      })
-      neutrino.config.plugin('html-page').tap(argv => {
-        expect(argv[0].webextPolyfill).toBe(
-          path.join(neutrino.options.root, 'polyfill-path')
-        )
-        expect(argv[0].template).toBe(
-          path.join(neutrino.options.root, 'template-path')
-        )
-        return argv
-      })
     })
   })
 })
@@ -121,7 +164,8 @@ function testEntriesSnapshot (polyfill) {
 
 function optionsFixture () {
   return {
-    source: path.resolve(__dirname, '../src'),
+    root: '/project',
+    source: '/project/src',
     mains: {
       background: {
         entry: 'background',
