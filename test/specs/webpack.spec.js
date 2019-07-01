@@ -1,4 +1,3 @@
-const path = require('path')
 const _ = require('lodash')
 const Neutrino = require('neutrino/Neutrino')
 const react = require('@neutrinojs/react')
