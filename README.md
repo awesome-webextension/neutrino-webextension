@@ -1,5 +1,7 @@
 # neutrino-webextension
 
+[![Greenkeeper badge](https://badges.greenkeeper.io/crimx/neutrino-webextension.svg)](https://greenkeeper.io/)
+
 Neutrino 9 preset for WebExtension development with hot reload and framework devtools.
 
 ## Features
