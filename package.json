@@ -45,7 +45,7 @@
     "archiver": "^3.0.0",
     "deepmerge": "^3.3.0",
     "fs-extra": "^8.0.1",
-    "globby": "^9.2.0",
+    "globby": "^10.0.1",
     "sinon-chrome": "^3.0.1",
     "webextensions-emulator": "^2.0.0",
     "yargs-parser": "^13.1.1"
@@ -54,7 +54,7 @@
     "@neutrinojs/react": "^9.0.0-rc.3",
     "@neutrinojs/standardjs": "^9.0.0-rc.3",
     "coveralls": "^3.0.4",
-    "eslint": "^5",
+    "eslint": "^6.0.1",
     "jest": "^24.8.0",
     "neutrino": "^9.0.0-rc.3",
     "react": "^16",
