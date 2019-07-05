@@ -38,7 +38,8 @@
   "scripts": {
     "start": "webpack-dev-server --mode development --open",
     "build": "webpack --mode production",
-    "test": "jest --coverage"
+    "test": "jest --coverage",
+    "test:CI": "jest --coverage --coverageReporters=text-lcov | coveralls"
   },
   "dependencies": {
     "archiver": "^3.0.0",
@@ -52,6 +53,7 @@
   "devDependencies": {
     "@neutrinojs/react": "^9.0.0-rc.3",
     "@neutrinojs/standardjs": "^9.0.0-rc.3",
+    "coveralls": "^3.0.4",
     "eslint": "^5",
     "jest": "^24.8.0",
     "neutrino": "^9.0.0-rc.3",
