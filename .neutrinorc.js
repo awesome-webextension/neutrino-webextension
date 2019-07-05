@@ -4,6 +4,7 @@
 
 const standard = require('@neutrinojs/standardjs')
 const react = require('@neutrinojs/react')
+const copy = require('@neutrinojs/copy')
 const webext = require('./lib')
 
 module.exports = {
@@ -52,6 +53,11 @@ module.exports = {
       html: {
         title: 'neutrino-webextension'
       }
+    }),
+    copy({
+      patterns: [
+        { context: 'assets', from: '**/*', to: 'assets', toType: 'dir' }
+      ]
     }),
     webext({
       polyfill: true,
