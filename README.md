@@ -1,5 +1,9 @@
 # neutrino-webextension
 
+[![npm-version](https://img.shields.io/npm/v/neutrino-webextension.svg)](https://www.npmjs.com/package/neutrino-webextension)
+[![Build Status](https://travis-ci.org/crimx/neutrino-webextension.svg?branch=master)](https://travis-ci.org/crimx/neutrino-webextension)
+[![Coverage Status](https://coveralls.io/repos/github/crimx/neutrino-webextension/badge.svg?branch=master)](https://coveralls.io/github/crimx/neutrino-webextension?branch=master)
+
 Neutrino 9 preset for WebExtension development with hot reload and framework devtools.
 
 ## Features
