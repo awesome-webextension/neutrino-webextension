@@ -54,7 +54,7 @@
     "@neutrinojs/react": "^9.0.0-rc.3",
     "@neutrinojs/standardjs": "^9.0.0-rc.3",
     "coveralls": "^3.0.4",
-    "eslint": "^6.0.1",
+    "eslint": "5",
     "jest": "^24.8.0",
     "neutrino": "^9.0.0-rc.3",
     "react": "^16",
