@@ -80,12 +80,6 @@ describe('WexExtManifestPlugin', () => {
     await callPlugin(options, neutrinoOpts, entries)
 
     const tmpPath = path.join(neutrinoOpts.output, '../.webext_tmp')
-    expect(fse.remove).toHaveBeenCalledTimes(2)
-    expect(fse.remove).toHaveBeenNthCalledWith(1, tmpPath)
-    expect(fse.remove).toHaveBeenNthCalledWith(2, tmpPath)
-
-    expect(fse.move).toHaveBeenCalledTimes(1)
-    expect(fse.move).toHaveBeenCalledWith(neutrinoOpts.output, tmpPath)
 
     expect(fse.copy).toHaveBeenCalledTimes(4)
     expect(fse.copy).toHaveBeenCalledWith(
@@ -177,6 +171,9 @@ describe('WexExtManifestPlugin', () => {
       },
       expect.anything()
     )
+
+    expect(fse.remove).toHaveBeenCalledTimes(1)
+    expect(fse.remove).toHaveBeenCalledWith(tmpPath)
   })
 
   test('should not add polyfill if not enabled', async () => {
