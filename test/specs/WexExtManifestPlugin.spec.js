@@ -81,14 +81,9 @@ describe('WexExtManifestPlugin', () => {
 
     const tmpPath = path.join(neutrinoOpts.output, '../.webext_tmp')
 
-    expect(fse.copy).toHaveBeenCalledTimes(4)
     expect(fse.copy).toHaveBeenCalledWith(
       tmpPath,
       path.join(neutrinoOpts.output, 'chrome')
-    )
-    expect(fse.copy).toHaveBeenCalledWith(
-      tmpPath,
-      path.join(neutrinoOpts.output, 'firefox')
     )
     expect(fse.copy).toHaveBeenCalledWith(
       options.polyfill,
@@ -97,6 +92,11 @@ describe('WexExtManifestPlugin', () => {
     expect(fse.copy).toHaveBeenCalledWith(
       options.polyfill,
       path.join(neutrinoOpts.output, 'firefox/assets/browser-polyfill.min.js')
+    )
+
+    expect(fse.move).toHaveBeenCalledWith(
+      tmpPath,
+      path.join(neutrinoOpts.output, 'firefox')
     )
 
     expect(fse.writeJson).toHaveBeenCalledTimes(2)
@@ -171,9 +171,6 @@ describe('WexExtManifestPlugin', () => {
       },
       expect.anything()
     )
-
-    expect(fse.remove).toHaveBeenCalledTimes(1)
-    expect(fse.remove).toHaveBeenCalledWith(tmpPath)
   })
 
   test('should not add polyfill if not enabled', async () => {
