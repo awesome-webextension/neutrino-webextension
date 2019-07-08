@@ -43,7 +43,7 @@
   },
   "dependencies": {
     "archiver": "^3.0.0",
-    "deepmerge": "^3.3.0",
+    "deepmerge": "^4.0.0",
     "fs-extra": "^8.0.1",
     "globby": "^10.0.1",
     "sinon-chrome": "^3.0.1",
