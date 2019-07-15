@@ -47,7 +47,7 @@
     "fs-extra": "^8.0.1",
     "globby": "^10.0.1",
     "sinon-chrome": "^3.0.1",
-    "webextensions-emulator": "^2.0.0",
+    "webextensions-emulator": "^1.1.0",
     "yargs-parser": "^13.1.1"
   },
   "devDependencies": {
