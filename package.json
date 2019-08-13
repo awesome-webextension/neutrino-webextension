@@ -62,7 +62,7 @@
     "react-dom": "^16",
     "react-hot-loader": "^4",
     "webextension-polyfill": ">=0.4.0",
-    "webpack": "^4",
+    "webpack": "^4.39.2",
     "webpack-cli": "^3",
     "webpack-dev-server": "^3"
   },
