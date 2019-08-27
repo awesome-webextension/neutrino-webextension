@@ -14,7 +14,8 @@ module.exports = {
       background: {
         entry: 'src/background',
         webext: {
-          type: 'background'
+          type: 'background',
+          setup: 'src/background/__dev__/setup'
         }
       },
       popup: {
