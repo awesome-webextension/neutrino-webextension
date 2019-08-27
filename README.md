@@ -1,8 +1,8 @@
 # neutrino-webextension
 
 [![npm-version](https://img.shields.io/npm/v/neutrino-webextension.svg)](https://www.npmjs.com/package/neutrino-webextension)
-[![Build Status](https://travis-ci.org/crimx/neutrino-webextension.svg?branch=master)](https://travis-ci.org/crimx/neutrino-webextension)
-[![Coverage Status](https://coveralls.io/repos/github/crimx/neutrino-webextension/badge.svg?branch=master)](https://coveralls.io/github/crimx/neutrino-webextension?branch=master) [![Greenkeeper badge](https://badges.greenkeeper.io/crimx/neutrino-webextension.svg)](https://greenkeeper.io/)
+[![Build Status](https://img.shields.io/travis/com/crimx/neutrino-webextension/master)](https://travis-ci.org/crimx/neutrino-webextension)
+[![Coverage Status](https://img.shields.io/coveralls/github/crimx/neutrino-webextension/master)](https://coveralls.io/github/crimx/neutrino-webextension?branch=master) [![Greenkeeper badge](https://badges.greenkeeper.io/crimx/neutrino-webextension.svg)](https://greenkeeper.io/)
 
 Neutrino 9 preset for WebExtension development with hot reload and framework devtools.
 
@@ -41,7 +41,6 @@ Npm
 
 `webextension-polyfill` is optional.
 
-
 ## Project Layout
 
 This preset follows the standard [project layout](https://neutrinojs.org/project-layout/) specified by Neutrino. This means that by default all project source code should live in a directory named `src` in the root of the project. This includes JavaScript files, CSS stylesheets, images, and any other assets that would be available to your compiled project.
@@ -58,7 +57,7 @@ src/manifest/
 
 This preset is designed to work with [eslint](https://github.com/neutrinojs/neutrino/blob/master/packages/eslint/README.md) preset and [web](https://github.com/neutrinojs/neutrino/blob/master/packages/web/README.md#preset-options) preset or other Neutrino presets that are based on eslint or web (e.g. [standardjs](https://github.com/neutrinojs/neutrino/blob/master/packages/standardjs/README.md) or [react](https://github.com/neutrinojs/neutrino/blob/master/packages/react/README.md#advanced-configuration)).
 
-This preset should be placed ***after*** all other presets. Example:
+This preset should be placed **_after_** all other presets. Example:
 
 ```javascript
 // .neutrinorc.js
@@ -117,7 +116,7 @@ module.exports = {
 }
 ```
 
-[This repo](https://github.com/crimx/neutrino-webextension) itself is also a workable example (But for testing only. Do not use in production). 
+[This repo](https://github.com/crimx/neutrino-webextension) itself is also a workable example (But for testing only. Do not use in production).
 
 ```bash
 git clone git@github.com:crimx/neutrino-webextension.git
@@ -128,7 +127,6 @@ yarn start --open-page popup.html
 # or
 yarn build
 ```
-
 
 ## Development
 
@@ -180,7 +178,6 @@ yarn neutrino-webextension-zip '!test/specs/**/*' '.env'
 
 See [wext-shipit](https://github.com/LinusU/wext-shipit) which is based on [web-ext](https://www.npmjs.com/package/web-ext) and [chrome-webstore-upload-cli](https://www.npmjs.com/package/chrome-webstore-upload-cli).
 
-
 ## Testing
 
 Use [`sinon-chrome`](https://github.com/acvetkov/sinon-chrome) which supports Chrome and Firefox API stubs.
@@ -198,7 +195,7 @@ All options are optional.
 
 ## Entry Options
 
-WebExtension manifest options `page`, `content_scripts`, `background`, `pageless`, `browser_action`, `page_action`, `options_page` and `options_ui` ***SHOULD*** only be configured in `.neutrinorc.js`. This preset will handle file dependencies for you. If you manually add these fileds in `common.manifest.json` or `[browser].manifest.json`, options may get overwritten.
+WebExtension manifest options `page`, `content_scripts`, `background`, `pageless`, `browser_action`, `page_action`, `options_page` and `options_ui` **_SHOULD_** only be configured in `.neutrinorc.js`. This preset will handle file dependencies for you. If you manually add these fileds in `common.manifest.json` or `[browser].manifest.json`, options may get overwritten.
 
 Specificity: `.neutrinorc.js` < `common.manifest.json` < `[browser].manifest.json`
 
