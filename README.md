@@ -116,7 +116,7 @@ module.exports = {
 }
 ```
 
-[This repo](https://github.com/crimx/neutrino-webextension) itself is also a workable example (But for testing only. Do not use in production).
+[This repo](https://github.com/crimx/neutrino-webextension) itself is also a workable example (But for demo only. Do not use directly in production).
 
 ```bash
 git clone git@github.com:crimx/neutrino-webextension.git
