@@ -48,7 +48,7 @@
     "globby": "^10.0.1",
     "sinon-chrome": "^3.0.1",
     "webextensions-emulator": "^1.2.4",
-    "yargs-parser": "^13.1.1"
+    "yargs-parser": "^14.0.0"
   },
   "devDependencies": {
     "@neutrinojs/copy": "^9.0.0-rc.3",
