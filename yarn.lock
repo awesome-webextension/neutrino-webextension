@@ -8144,10 +8144,10 @@ webextension-polyfill@>=0.4.0:
   resolved "https://registry.yarnpkg.com/webextension-polyfill/-/webextension-polyfill-0.4.0.tgz#9cc5a60f0f2bf907a6b349fdd7e61701f54956f9"
   integrity sha512-oreMp+EoAo1pzRMigx4jB5jInIpx6NTCySPSjGyLLee/dCIPiRqowCEfbFP8o20wz9SOtNwSsfkaJ9D/tRgpag==
 
-webextensions-emulator@^1.1.0:
-  version "1.2.1"
-  resolved "https://registry.yarnpkg.com/webextensions-emulator/-/webextensions-emulator-1.2.1.tgz#73ea8e704ef6d56b6547b4697d75e0616280dac7"
-  integrity sha512-flTOng5irYp/Fx+Cktp0E/gdJTF9AGTL1+xRh1HBL0jKbdtgeaMx5vOPkm0cCgqtxxgqftvmw15Ooo+qqyZHEg==
+webextensions-emulator@^1.2.4:
+  version "1.2.4"
+  resolved "https://registry.yarnpkg.com/webextensions-emulator/-/webextensions-emulator-1.2.4.tgz#eaf23ab086f0134b6e6dc261d51b3e8e1ad4c4b1"
+  integrity sha512-E7+sw9KxlXZsToppSZP/rM0nBKYoWVfvi+OZHW3nbVAeVHK5/aelrPocGn/7R/DoVS5Fde2V8ow7kmB99p+KFA==
   dependencies:
     lodash "^4.17.11"
     sinon-chrome "^2.3.2"
