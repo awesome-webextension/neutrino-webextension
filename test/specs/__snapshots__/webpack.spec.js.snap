@@ -2,7 +2,7 @@
 
 exports[`webpack development should add global and entry setup files 1`] = `
 Array [
-  "webextensions-emulator/dist/core",
+  "webextensions-emulator/lib/core",
   "/global-setup-path",
   "/entry-setup-path",
   "/project/src/index",
@@ -11,7 +11,7 @@ Array [
 
 exports[`webpack development should resolve relative setup path 1`] = `
 Array [
-  "webextensions-emulator/dist/core",
+  "webextensions-emulator/lib/core",
   "/project/global-setup-path",
   "/project/src/entry-setup-path",
   "/project/src/index",
@@ -21,28 +21,28 @@ Array [
 exports[`webpack development snapshots entries with polyfill 1`] = `
 Object {
   "background": Array [
-    "webextensions-emulator/dist/background",
+    "webextensions-emulator/lib/background",
     "/project/src/background",
   ],
   "content1": Array [
-    "webextensions-emulator/dist/core",
+    "webextensions-emulator/lib/core",
     "/project/src/content1/__dev__/setup",
     "/project/src/content1",
   ],
   "content2": Array [
-    "webextensions-emulator/dist/core",
+    "webextensions-emulator/lib/core",
     "/project/src/content2",
   ],
   "page": Array [
-    "webextensions-emulator/dist/core",
+    "webextensions-emulator/lib/core",
     "/project/src/page",
   ],
   "pageless": Array [
-    "webextensions-emulator/dist/core",
+    "webextensions-emulator/lib/core",
     "/project/src/pageless",
   ],
   "popup": Array [
-    "webextensions-emulator/dist/core",
+    "webextensions-emulator/lib/core",
     "/project/src/popup",
   ],
 }
@@ -51,28 +51,28 @@ Object {
 exports[`webpack development snapshots entries without polyfill 1`] = `
 Object {
   "background": Array [
-    "webextensions-emulator/dist/background",
+    "webextensions-emulator/lib/background",
     "/project/src/background",
   ],
   "content1": Array [
-    "webextensions-emulator/dist/core",
+    "webextensions-emulator/lib/core",
     "/project/src/content1/__dev__/setup",
     "/project/src/content1",
   ],
   "content2": Array [
-    "webextensions-emulator/dist/core",
+    "webextensions-emulator/lib/core",
     "/project/src/content2",
   ],
   "page": Array [
-    "webextensions-emulator/dist/core",
+    "webextensions-emulator/lib/core",
     "/project/src/page",
   ],
   "pageless": Array [
-    "webextensions-emulator/dist/core",
+    "webextensions-emulator/lib/core",
     "/project/src/pageless",
   ],
   "popup": Array [
-    "webextensions-emulator/dist/core",
+    "webextensions-emulator/lib/core",
     "/project/src/popup",
   ],
 }
