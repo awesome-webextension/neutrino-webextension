@@ -85,13 +85,13 @@ describe('WexExtManifestPlugin', () => {
       tmpPath,
       path.join(neutrinoOpts.output, 'chrome')
     )
-    expect(fse.copy).toHaveBeenCalledWith(
+    expect(fse.readFile).toHaveBeenCalledWith(
       options.polyfill,
-      path.join(neutrinoOpts.output, 'chrome/assets/browser-polyfill.min.js')
+      'utf8'
     )
-    expect(fse.copy).toHaveBeenCalledWith(
+    expect(fse.readFile).toHaveBeenCalledWith(
       options.polyfill,
-      path.join(neutrinoOpts.output, 'firefox/assets/browser-polyfill.min.js')
+      'utf8'
     )
 
     expect(fse.move).toHaveBeenCalledWith(
