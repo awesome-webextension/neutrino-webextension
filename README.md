@@ -11,6 +11,7 @@ Neutrino 9 preset for WebExtension development with hot reload and framework dev
 - Zero upfront configuration necessary to start developing and building a WebExtension.
 - Run development mode in a fake WebExtension environment which supports hot reload and framework devtools.
 - Webpack chunks are translated into manifest configs nicely.
+- Supports code-splitting with native dynamic import (which is not possible with the default JSONP).
 - Outputs are bundled for each browser respectively, with different manifest.
 - Works well with other official Neutrino presets.
 
