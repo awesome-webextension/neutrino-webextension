@@ -8311,10 +8311,10 @@ webpack-sources@^1.1.0, webpack-sources@^1.4.0, webpack-sources@^1.4.1:
     source-list-map "^2.0.0"
     source-map "~0.6.1"
 
-webpack-target-webextension@^0.1.0:
-  version "0.1.0"
-  resolved "https://registry.yarnpkg.com/webpack-target-webextension/-/webpack-target-webextension-0.1.0.tgz#d975b73cf5e42638f3bfe711f327125c99d7036d"
-  integrity sha512-RK9EdsecmwRyHfICFydmeW3jW7EOAmF2O1S3gsVrAiakYd0GsD73TAe8frHJ9psCD9cTt5phwIrDll12HJPPYg==
+webpack-target-webextension@^0.1.1:
+  version "0.1.1"
+  resolved "https://registry.yarnpkg.com/webpack-target-webextension/-/webpack-target-webextension-0.1.1.tgz#bb9051e188bc22d2fe9cb7d917a03eaac85c100c"
+  integrity sha512-U+SYw54LpZCz5Z0jB1pIZpU8fuNUHJSzXIFs+p9hW/w1TcKRta0oqYxLm2VHn+Df/dZ/Vm++9kC93guRvwBiQg==
 
 webpack@^4:
   version "4.41.5"
