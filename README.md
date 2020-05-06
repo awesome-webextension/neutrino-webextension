@@ -11,7 +11,7 @@ Neutrino 9 preset for WebExtension development with hot reload and framework dev
 - Zero upfront configuration necessary to start developing and building a WebExtension.
 - Run development mode in a fake WebExtension environment which supports hot reload and framework devtools.
 - Webpack chunks are translated into manifest configs nicely.
-- Supports code-splitting with native dynamic import (which is not possible with the default JSONP).
+- Supports code-splitting with native dynamic import which is not possible with the default Webpack4 JSONP ([Caveats](#caveats)).
 - Outputs are bundled for each browser respectively, with different manifest.
 - Works well with other official Neutrino presets.
 
@@ -212,3 +212,13 @@ Entry options can be configured through `options.mains.[entry].webext`. All are 
   - Except `'page'`, `'pageless'` and `'content_scripts'` other entry types should be one and only.
 - `webext.manifest`: object. Other manifest options for this field. See example above.
 - `webext.setup`: string. Default empty. Path to a setup file which will run right before this entry on development mode. Relative path is resolved relative to Neutrino `source` path.
+
+# Caveats
+
+If you don't use dynamic import skip this section.
+
+Native dynamic import is [buggy](https://bugzilla.mozilla.org/show_bug.cgi?id=1536094) in Firefox. A workaround is to write a postbuild script targeting only Firefox build. It collects all the dynamic chunks and appends them to every entries in htmls and the `manifest.json` script lists.
+
+The addons-linter is also [making aggressive errors](https://github.com/mozilla/addons-linter/issues/2498) on dynamic import. A workaround is to just replace the the `import` with other name. Since all the dynamic chunks are loaded in Firefox the `import(script)` code will not be run.
+
+See [real-life example](https://github.com/crimx/ext-saladict/blob/dev/scripts/firefox-fix.js).
