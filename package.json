@@ -47,7 +47,7 @@
     "fs-extra": "^9.0.0",
     "globby": "^10.0.1",
     "webextensions-emulator": "^1.2.6",
-    "webpack-target-webextension": "^0.1.1",
+    "webpack-target-webextension": "^0.1.2",
     "yargs-parser": "^18.1.0"
   },
   "devDependencies": {
