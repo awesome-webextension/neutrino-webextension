@@ -1,6 +1,6 @@
 {
   "name": "neutrino-webextension",
-  "version": "1.1.7",
+  "version": "1.1.8",
   "description": "Neutrino 9 preset for WebExtension development with hot reload and framework devtools.",
   "keywords": [
     "neutrino",
