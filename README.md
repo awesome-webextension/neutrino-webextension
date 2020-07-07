@@ -15,6 +15,28 @@ Neutrino 9 preset for WebExtension development with hot reload and framework dev
 - Outputs are bundled for each browser respectively, with different manifest.
 - Works well with other official Neutrino presets.
 
+## Who uses it
+
+<table>
+  <tbody>
+    <tr>
+      <td align="center">
+        <img width="100" height="100" src="https://github.com/crimx/ext-saladict/raw/dev/assets/icon-128.png">
+      </td>
+    </tr>
+    <tr>
+      <th align="center">
+        <a href="https://github.com/crimx/ext-saladict">Saladict</a>
+      </th>
+    </tr>
+    <tr>
+      <td align="center">
+        Five-star extension with 300k+ users
+      </td>
+    </tr>
+  <tbody>
+</table>
+
 ## Requirements
 
 - Node.js ^8.10 or 10+
@@ -217,8 +239,8 @@ Entry options can be configured through `options.mains.[entry].webext`. All are 
 
 If you don't use dynamic import skip this section.
 
-Native dynamic import is [buggy](https://bugzilla.mozilla.org/show_bug.cgi?id=1536094) in Firefox. A workaround is to write a postbuild script targeting only Firefox build. It collects all the dynamic chunks and appends them to every entries in htmls and the `manifest.json` script lists.
+Native dynamic import is [buggy](https://bugzilla.mozilla.org/show_bug.cgi?id=1536094) in Firefox. A workaround is to write a postbuild script targeting only Firefox build. It should collect all the dynamic chunks and append them to every entries in htmls and the `manifest.json` script lists.
 
-The addons-linter is also [making aggressive errors](https://github.com/mozilla/addons-linter/issues/2498) on dynamic import. A workaround is to just replace the the `import` with other name. Since all the dynamic chunks are loaded in Firefox the `import(script)` code will not be run.
+~The addons-linter is also [making aggressive errors](https://github.com/mozilla/addons-linter/issues/2498) on dynamic import. A workaround is to just replace the the `import` with other name. Since all the dynamic chunks are loaded in Firefox the `import(script)` code will not be run.~
 
 See [real-life example](https://github.com/crimx/ext-saladict/blob/dev/scripts/firefox-fix.js).
