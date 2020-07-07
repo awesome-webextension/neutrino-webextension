@@ -2,7 +2,7 @@
 
 exports[`webpack development should add global and entry setup files 1`] = `
 Array [
-  "webextensions-emulator/lib/core",
+  "webextensions-emulator/dist/core",
   "/global-setup-path",
   "/entry-setup-path",
   "/project/src/index",
@@ -11,7 +11,7 @@ Array [
 
 exports[`webpack development should resolve relative setup path 1`] = `
 Array [
-  "webextensions-emulator/lib/core",
+  "webextensions-emulator/dist/core",
   "/project/global-setup-path",
   "/project/src/entry-setup-path",
   "/project/src/index",
@@ -21,28 +21,28 @@ Array [
 exports[`webpack development snapshots entries with polyfill 1`] = `
 Object {
   "background": Array [
-    "webextensions-emulator/lib/background",
+    "webextensions-emulator/dist/background",
     "/project/src/background",
   ],
   "content1": Array [
-    "webextensions-emulator/lib/core",
+    "webextensions-emulator/dist/core",
     "/project/src/content1/__dev__/setup",
     "/project/src/content1",
   ],
   "content2": Array [
-    "webextensions-emulator/lib/core",
+    "webextensions-emulator/dist/core",
     "/project/src/content2",
   ],
   "page": Array [
-    "webextensions-emulator/lib/core",
+    "webextensions-emulator/dist/core",
     "/project/src/page",
   ],
   "pageless": Array [
-    "webextensions-emulator/lib/core",
+    "webextensions-emulator/dist/core",
     "/project/src/pageless",
   ],
   "popup": Array [
-    "webextensions-emulator/lib/core",
+    "webextensions-emulator/dist/core",
     "/project/src/popup",
   ],
 }
@@ -51,28 +51,28 @@ Object {
 exports[`webpack development snapshots entries without polyfill 1`] = `
 Object {
   "background": Array [
-    "webextensions-emulator/lib/background",
+    "webextensions-emulator/dist/background",
     "/project/src/background",
   ],
   "content1": Array [
-    "webextensions-emulator/lib/core",
+    "webextensions-emulator/dist/core",
     "/project/src/content1/__dev__/setup",
     "/project/src/content1",
   ],
   "content2": Array [
-    "webextensions-emulator/lib/core",
+    "webextensions-emulator/dist/core",
     "/project/src/content2",
   ],
   "page": Array [
-    "webextensions-emulator/lib/core",
+    "webextensions-emulator/dist/core",
     "/project/src/page",
   ],
   "pageless": Array [
-    "webextensions-emulator/lib/core",
+    "webextensions-emulator/dist/core",
     "/project/src/pageless",
   ],
   "popup": Array [
-    "webextensions-emulator/lib/core",
+    "webextensions-emulator/dist/core",
     "/project/src/popup",
   ],
 }
@@ -81,6 +81,7 @@ Object {
 exports[`webpack production snapshots entries with polyfill(should also not be injected) 1`] = `
 Object {
   "background": Array [
+    "/home/crimx/code/neutrino-webextension/node_modules/webpack-target-webextension/lib/background.js",
     "/project/src/background",
   ],
   "content1": Array [
@@ -104,6 +105,7 @@ Object {
 exports[`webpack production snapshots entries without polyfill(should not be injected) 1`] = `
 Object {
   "background": Array [
+    "/home/crimx/code/neutrino-webextension/node_modules/webpack-target-webextension/lib/background.js",
     "/project/src/background",
   ],
   "content1": Array [

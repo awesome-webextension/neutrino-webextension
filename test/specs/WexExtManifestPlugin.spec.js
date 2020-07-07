@@ -6,8 +6,39 @@ const merge = require('deepmerge')
 jest.mock('fs-extra')
 
 describe('WexExtManifestPlugin', () => {
+  let vfs // virtual file system
+  
   beforeEach(() => {
     jest.resetModules()
+    
+    vfs = {
+      'node_modules/webextension-polyfill/dist/browser-polyfill.min.js': 'polyfill'
+    }
+    
+    fse.move.mockImplementation((src, dest) => {
+      vfs[dest] = vfs[src]
+      vfs[src] = undefined
+    })
+
+    fse.copy.mockImplementation((src, dest) => {
+      vfs[dest] = vfs[src]
+    })
+
+    fse.writeFile.mockImplementation((dest, data) => {
+      vfs[dest] = data
+    })
+
+    fse.outputFile.mockImplementation((dest, data) => {
+      vfs[dest] = data
+    })
+
+    fse.writeJson.mockImplementation((dest, json) => {
+      vfs[dest] = json
+    })
+
+    fse.outputJson.mockImplementation((dest, json) => {
+      vfs[dest] = json
+    })
   })
 
   test('should emit correct files with basic setup', async () => {
@@ -17,6 +48,12 @@ describe('WexExtManifestPlugin', () => {
       manifest: '/project/manifest-path',
       setup: '/project/setup-path'
     }
+    
+    fse.readFile.mockImplementation(async file => {
+      if (file === options.polyfill) {
+        return 'polyfill'
+      }
+    })
 
     jest.doMock(
       path.resolve(options.manifest, 'common.manifest'),
@@ -65,6 +102,8 @@ describe('WexExtManifestPlugin', () => {
         }
       }
     })
+    
+    vfs[neutrinoOpts.output] = 'output'
 
     const entries = [
       ['background', ['common.js', 'background.js']],
@@ -80,97 +119,80 @@ describe('WexExtManifestPlugin', () => {
     await callPlugin(options, neutrinoOpts, entries)
 
     const tmpPath = path.join(neutrinoOpts.output, '../.webext_tmp')
-
-    expect(fse.copy).toHaveBeenCalledWith(
-      tmpPath,
-      path.join(neutrinoOpts.output, 'chrome')
-    )
-    expect(fse.readFile).toHaveBeenCalledWith(
-      options.polyfill,
-      'utf8'
-    )
-    expect(fse.readFile).toHaveBeenCalledWith(
-      options.polyfill,
-      'utf8'
-    )
-
-    expect(fse.move).toHaveBeenCalledWith(
-      tmpPath,
-      path.join(neutrinoOpts.output, 'firefox')
-    )
-
-    expect(fse.writeJson).toHaveBeenCalledTimes(2)
-    expect(fse.writeJson).toHaveBeenCalledWith(
-      path.join(neutrinoOpts.output, 'chrome/manifest.json'),
-      {
-        background: {
-          persistent: false,
-          scripts: [
-            'assets/browser-polyfill.min.js',
-            'common.js',
-            'background.js'
-          ]
-        },
-        browser_action: {
-          default_popup: 'popup.html'
-        },
-        content_scripts: [
-          {
-            js: ['assets/browser-polyfill.min.js', 'common.js', 'content1.js'],
-            matches: ['<all_urls>']
-          },
-          {
-            all_frames: true,
-            js: ['assets/browser-polyfill.min.js', 'common.js', 'content2.js'],
-            match_about_blank: true,
-            matches: ['https://github.com/crimx/neutrino-webextension'],
-            run_at: 'document_start'
-          }
-        ],
-        options_page: 'options_page.html',
-        description: 'description_from_chrome',
-        mainfest_version: 2,
-        name: 'name_from_common',
-        short_name: 'short_name_from_chrome',
-        version: '1.0.0'
+    
+    expect(vfs[neutrinoOpts.output]).toBeUndefined()
+    expect(vfs[tmpPath]).toBeUndefined()
+    
+    expect(vfs[path.join(neutrinoOpts.output, 'chrome', 'assets/browser-polyfill.min.js')]).toBe('polyfill')
+    expect(vfs[path.join(neutrinoOpts.output, 'firefox', 'assets/browser-polyfill.min.js')]).toBe('polyfill')
+    
+    expect(vfs[path.join(neutrinoOpts.output, 'chrome')]).toBe('output')
+    expect(vfs[path.join(neutrinoOpts.output, 'firefox')]).toBe('output')
+    
+    expect(vfs[path.join(neutrinoOpts.output, 'chrome/manifest.json')]).toEqual({
+      background: {
+        persistent: false,
+        scripts: [
+          'assets/browser-polyfill.min.js',
+          'common.js',
+          'background.js'
+        ]
       },
-      expect.anything()
-    )
-    expect(fse.writeJson).toHaveBeenCalledWith(
-      path.join(neutrinoOpts.output, 'firefox/manifest.json'),
-      {
-        background: {
-          scripts: [
-            'assets/browser-polyfill.min.js',
-            'common.js',
-            'background.js'
-          ]
-        },
-        browser_action: {
-          default_popup: 'popup.html'
-        },
-        content_scripts: [
-          {
-            js: ['assets/browser-polyfill.min.js', 'common.js', 'content1.js'],
-            matches: ['<all_urls>']
-          },
-          {
-            all_frames: true,
-            js: ['assets/browser-polyfill.min.js', 'common.js', 'content2.js'],
-            match_about_blank: true,
-            matches: ['https://github.com/crimx/neutrino-webextension'],
-            run_at: 'document_start'
-          }
-        ],
-        options_page: 'options_page.html',
-        description: 'description_from_firefox',
-        mainfest_version: 2,
-        name: 'name_from_common',
-        short_name: 'short_name_from_common',
-        version: '1.0.0'
+      browser_action: {
+        default_popup: 'popup.html'
       },
-      expect.anything()
-    )
+      content_scripts: [
+        {
+          js: ['assets/browser-polyfill.min.js', 'common.js', 'content1.js'],
+          matches: ['<all_urls>']
+        },
+        {
+          all_frames: true,
+          js: ['assets/browser-polyfill.min.js', 'common.js', 'content2.js'],
+          match_about_blank: true,
+          matches: ['https://github.com/crimx/neutrino-webextension'],
+          run_at: 'document_start'
+        }
+      ],
+      options_page: 'options_page.html',
+      description: 'description_from_chrome',
+      mainfest_version: 2,
+      name: 'name_from_common',
+      short_name: 'short_name_from_chrome',
+      version: '1.0.0'
+    })
+    
+    expect(vfs[path.join(neutrinoOpts.output, 'firefox/manifest.json')]).toEqual({
+      background: {
+        scripts: [
+          'assets/browser-polyfill.min.js',
+          'common.js',
+          'background.js'
+        ]
+      },
+      browser_action: {
+        default_popup: 'popup.html'
+      },
+      content_scripts: [
+        {
+          js: ['assets/browser-polyfill.min.js', 'common.js', 'content1.js'],
+          matches: ['<all_urls>']
+        },
+        {
+          all_frames: true,
+          js: ['assets/browser-polyfill.min.js', 'common.js', 'content2.js'],
+          match_about_blank: true,
+          matches: ['https://github.com/crimx/neutrino-webextension'],
+          run_at: 'document_start'
+        }
+      ],
+      options_page: 'options_page.html',
+      description: 'description_from_firefox',
+      mainfest_version: 2,
+      name: 'name_from_common',
+      short_name: 'short_name_from_common',
+      version: '1.0.0'
+    })
   })
 
   test('should not add polyfill if not enabled', async () => {
@@ -206,6 +228,8 @@ describe('WexExtManifestPlugin', () => {
         }
       }
     })
+    
+    vfs[neutrinoOpts.output] = 'output'
 
     const entries = [
       ['background', ['common.js', 'background.js']],
@@ -219,75 +243,66 @@ describe('WexExtManifestPlugin', () => {
     ]
 
     await callPlugin(options, neutrinoOpts, entries)
+    
+    expect(vfs[neutrinoOpts.output]).toBeUndefined()
+    
+    expect(vfs[path.join(neutrinoOpts.output, 'chrome')]).toBe('output')
+    expect(vfs[path.join(neutrinoOpts.output, 'firefox')]).toBe('output')
 
-    expect(fse.copy).not.toHaveBeenCalledWith(
-      options.polyfill,
-      path.join(neutrinoOpts.output, 'chrome/assets/browser-polyfill.min.js')
-    )
-    expect(fse.copy).not.toHaveBeenCalledWith(
-      options.polyfill,
-      path.join(neutrinoOpts.output, 'firefox/assets/browser-polyfill.min.js')
-    )
-
-    expect(fse.writeJson).toHaveBeenCalledWith(
-      path.join(neutrinoOpts.output, 'chrome/manifest.json'),
-      {
-        background: {
-          scripts: ['common.js', 'background.js']
-        },
-        browser_action: {
-          default_popup: 'popup.html'
-        },
-        content_scripts: [
-          {
-            css: ['content1.css'],
-            matches: ['<all_urls>']
-          },
-          {
-            all_frames: true,
-            js: ['common.js', 'content2.js'],
-            match_about_blank: true,
-            matches: ['https://github.com/crimx/neutrino-webextension'],
-            run_at: 'document_start'
-          }
-        ],
-        options_ui: {
-          page: 'options_ui.html'
-        },
-        version: '1.0.0'
+    expect(vfs[path.join(neutrinoOpts.output, 'chrome', 'assets/browser-polyfill.min.js')]).toBeUndefined()
+    expect(vfs[path.join(neutrinoOpts.output, 'firefox', 'assets/browser-polyfill.min.js')]).toBeUndefined()
+    
+    expect(vfs[path.join(neutrinoOpts.output, 'chrome/manifest.json')]).toEqual({
+      background: {
+        scripts: ['common.js', 'background.js']
       },
-      expect.anything()
-    )
-
-    expect(fse.writeJson).toHaveBeenCalledWith(
-      path.join(neutrinoOpts.output, 'firefox/manifest.json'),
-      {
-        background: {
-          scripts: ['common.js', 'background.js']
-        },
-        browser_action: {
-          default_popup: 'popup.html'
-        },
-        content_scripts: [
-          {
-            css: ['content1.css'],
-            matches: ['<all_urls>']
-          },
-          {
-            all_frames: true,
-            js: ['common.js', 'content2.js'],
-            match_about_blank: true,
-            matches: ['https://github.com/crimx/neutrino-webextension'],
-            run_at: 'document_start'
-          }
-        ],
-        options_ui: {
-          page: 'options_ui.html'
-        },
-        version: '1.0.0'
+      browser_action: {
+        default_popup: 'popup.html'
       },
-      expect.anything()
-    )
+      content_scripts: [
+        {
+          css: ['content1.css'],
+          matches: ['<all_urls>']
+        },
+        {
+          all_frames: true,
+          js: ['common.js', 'content2.js'],
+          match_about_blank: true,
+          matches: ['https://github.com/crimx/neutrino-webextension'],
+          run_at: 'document_start'
+        }
+      ],
+      options_ui: {
+        page: 'options_ui.html'
+      },
+      version: '1.0.0'
+    })
+    
+    expect(vfs[path.join(neutrinoOpts.output, 'firefox/manifest.json')]).toEqual({
+      background: {
+        scripts: ['common.js', 'background.js']
+      },
+      browser_action: {
+        default_popup: 'popup.html'
+      },
+      content_scripts: [
+        {
+          css: ['content1.css'],
+          matches: ['<all_urls>']
+        },
+        {
+          all_frames: true,
+          js: ['common.js', 'content2.js'],
+          match_about_blank: true,
+          matches: ['https://github.com/crimx/neutrino-webextension'],
+          run_at: 'document_start'
+        }
+      ],
+      options_ui: {
+        page: 'options_ui.html'
+      },
+      version: '1.0.0'
+    })
   })
 })
 
