@@ -276,6 +276,9 @@ yarn build --livereload
 
 # specify browser application
 yarn build --livereload=firefox
+
+# with arguments
+yarn build --livereload=google-chrome --livereloadargs='--profile-directory=Profile 1'
 ```
 
 Behind the scene whenever webpack finishes bundling, it opens a special url in the browser running the extension. The url is then captured by the injected script which notifies the extension to reload itself.
