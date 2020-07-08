@@ -46,6 +46,7 @@
     "deepmerge": "^3.3.0",
     "fs-extra": "^9.0.0",
     "globby": "^10.0.1",
+    "open": "^7.0.4",
     "webextensions-emulator": "^1.2.6",
     "webpack-target-webextension": "^0.1.3",
     "yargs-parser": "^18.1.0"

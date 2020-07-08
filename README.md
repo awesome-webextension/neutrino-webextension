@@ -9,19 +9,24 @@ Neutrino 9 preset for WebExtension development with hot reload and framework dev
 ## Features
 
 - Zero upfront configuration necessary to start developing and building a WebExtension.
-- Run development mode in a fake WebExtension environment which supports hot reload and framework devtools.
+- Real extension [live reloading](#live-reloading).
+- Or run development mode in a fake WebExtension environment which supports hot reload and framework devtools.
 - Webpack chunks are translated into manifest configs nicely.
-- Supports code-splitting with native dynamic import which is not possible with the default Webpack4 JSONP ([Caveats](#caveats)).
-- Outputs are bundled for each browser respectively, with different manifest.
+- Supports code-splitting with native dynamic import([Caveats](#caveats)).
+- Outputs are automatically bundled for each browser respectively, with different manifests.
 - Works well with other official Neutrino presets.
 
-## Who uses it
+## Why Neutrino
+
+[Neutrino](https://neutrinojs.org/) combines the power of webpack with the simplicity of presets. It is the best scaffolding (AFAIK) on balancing Simplicity and Flexibility.
+
+## Who Use It
 
 <table>
   <tbody>
     <tr>
       <td align="center">
-        <img width="100" height="100" src="https://github.com/crimx/ext-saladict/raw/dev/assets/icon-128.png">
+        <img width="100" height="100" src="https://raw.githubusercontent.com/crimx/ext-saladict/dev/assets/icon-128.png">
       </td>
     </tr>
     <tr>
@@ -31,7 +36,7 @@ Neutrino 9 preset for WebExtension development with hot reload and framework dev
     </tr>
     <tr>
       <td align="center">
-        Five-star extension with 300k+ users
+        Five-star extension <br>with 300k+ users
       </td>
     </tr>
   <tbody>
@@ -155,20 +160,38 @@ yarn build
 
 Follow instructions of other presets. Typically:
 
-```
+```bash
 yarn start
 ```
 
 Or to jump to a specific entry:
 
-```
+```bash
 yarn start --open-page [entry name].html
 ```
 
 Or just keep one entry for faster bundling:
 
-```
+```bash
 yarn start --wextentry [entry name]
+```
+
+[Debug Mode](#debug-mode):
+
+```bash
+yarn build --debug
+```
+
+[Live Reloading](#live-reloading):
+
+```bash
+yarn build --livereload
+```
+
+With webpack [watch](https://webpack.js.org/configuration/watch/)
+
+```bash
+yarn build --livereload --debug --watch
 ```
 
 ## Production
@@ -235,7 +258,37 @@ Entry options can be configured through `options.mains.[entry].webext`. All are 
 - `webext.manifest`: object. Other manifest options for this field. See example above.
 - `webext.setup`: string. Default empty. Path to a setup file which will run right before this entry on development mode. Relative path is resolved relative to Neutrino `source` path.
 
-# Caveats
+## Debug Mode
+
+```bash
+yarn build --debug
+```
+
+- Adds `process.env.DEBUG` variable with `true`.
+- Adds source map.
+- Removes compression.
+
+## Live Reloading
+
+```bash
+yarn build --livereload
+
+# specify browser application
+yarn build --livereload=firefox
+```
+
+Behind the scene whenever webpack finishes bundling, it opens a special url in the browser running the extension. The url is then captured by the injected script which notifies the extension to reload itself.
+
+In order to redirect web requests and reload itself, additional files and permissions are added to the extension. Do not use in production.
+
+These are added to to the manifest:
+
+- Web requests related permissions.
+- Browsing data permission (for removing special page history).
+- Livereload assets are added to web accessible resources.
+- Background page becomes persistent.
+
+## Caveats
 
 If you don't use dynamic import skip this section.
 
