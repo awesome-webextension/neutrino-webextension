@@ -30,6 +30,7 @@
     "neutrino-webextension-zip": "./lib/zip.js"
   },
   "files": [
+    "livereload/**/*",
     "lib/**/*",
     "template.dev.ejs",
     "template.ejs",
