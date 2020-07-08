@@ -2,8 +2,7 @@
 
 [![npm-version](https://img.shields.io/npm/v/neutrino-webextension.svg)](https://www.npmjs.com/package/neutrino-webextension)
 [![Build Status](https://img.shields.io/travis/com/crimx/neutrino-webextension/master)](https://travis-ci.org/crimx/neutrino-webextension)
-[![Coverage Status](https://img.shields.io/coveralls/github/crimx/neutrino-webextension/master)](https://coveralls.io/github/crimx/neutrino-webextension?branch=master) [![Greenkeeper badge](https://badges.greenkeeper.io/crimx/neutrino-webextension.svg)](https://greenkeeper.io/)
-
+[![Coverage Status](https://img.shields.io/coveralls/github/crimx/neutrino-webextension/master)](https://coveralls.io/github/crimx/neutrino-webextension?branch=master)
 Neutrino 9 preset for WebExtension development with hot reload and framework devtools.
 
 ## Features
@@ -283,7 +282,7 @@ yarn build --livereload=google-chrome --livereloadargs='--profile-directory=Prof
 
 Behind the scene whenever webpack finishes bundling, it opens a special url in the browser running the extension. The url is then captured by the injected script which notifies the extension to reload itself.
 
-In order to redirect web requests and reload itself, additional files and permissions are added to the extension. Do not use in production.
+In order to redirect web requests and reload itself, additional files and permissions are added to the extension. Do not run `--livereload` in production.
 
 These are added to to the manifest:
 
