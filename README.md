@@ -3,6 +3,7 @@
 [![npm-version](https://img.shields.io/npm/v/neutrino-webextension.svg)](https://www.npmjs.com/package/neutrino-webextension)
 [![Build Status](https://img.shields.io/travis/com/crimx/neutrino-webextension/master)](https://travis-ci.org/crimx/neutrino-webextension)
 [![Coverage Status](https://img.shields.io/coveralls/github/crimx/neutrino-webextension/master)](https://coveralls.io/github/crimx/neutrino-webextension?branch=master)
+
 Neutrino 9 preset for WebExtension development with hot reload and framework devtools.
 
 ## Features
@@ -231,14 +232,14 @@ Use [`sinon-chrome`](https://github.com/acvetkov/sinon-chrome) which supports Ch
 
 All options are optional.
 
-- `polyfill`: boolean or string. Default `false`. Generate polyfill related configs. If `true` the `webextension-polyfill` should be installed. You can alos provide path to a custom polyfill file.
-- `removePolyfillSourcemap`: boolean. Default `true` on production. Remove link to source map.
+- `polyfill`: boolean or string. Default `false`. Generate polyfill related configs. If `true` the `webextension-polyfill` should be installed. You can also provide path to a custom polyfill file.
+- `removePolyfillSourcemap`: boolean. Default `true` on production. Remove link to source map in `webextension-polyfill`.
 - `manifest`: string. Default `'<neutrino.options.root>/src/manifest/'`. Extension manifests directory.
-  - This directory should have at least a `[browser].manifest.(json|js)` (e.g. `firefox.manifest.(json|js)`). This preset will read this directory to get browser names and generate outputs respectively.
-  - A `common.manifest.json` can be added for shared values.
-  - Version number is copied from package.json by default. If you specify `version` field on any manifest.json it will overwrite the default. This is not recommended. You should just perform sematic updates on package.json to avoid confusion. See [standard-version](https://www.npmjs.com/package/standard-version) for example.
-- `template`: string. Default [`<neutrino-webextension_root>/template.ejs`](./template.ejs). Path to a special template for html-webpack-plugin. You normally don't have to change this. The html-webpack-plugin can be configured through [web](https://github.com/neutrinojs/neutrino/blob/master/packages/web/README.md#preset-options) preset or other Neutrino presets that based on web (e.g [react](https://github.com/neutrinojs/neutrino/blob/master/packages/react/README.md#advanced-configuration)). If you really need to replace the template, copy [template.ejs](./template.ejs) and make your own.
-- `setup`: string. Default empty. Path to a setup file for development which will run right after the fake WebExtension environment and before other scripts including webextension-polyfill. Relative path is resolved relative to Neutrino `root` path. Here you can add other polyfills or play with the sinon-chrome stubs. If you think some of the fake values or functionalities should be added by default, please open a PR to [`webextensions-emulator`](https://github.com/crimx/webextensions-emulator).
+  - This directory should have at least a `[browser].manifest.(json|js)` (e.g. `firefox.manifest.json`). This preset will read the manifest directory to get browser names and generate outputs respectively.
+  - A `common.manifest.(json|js)` can be added for shared values.
+  - Version number is copied from package.json by default. If you specify `version` field on any manifest.json it will overwrite the default. This is not recommended. You should only perform sematic updates on package.json to avoid confusion. See [standard-version](https://www.npmjs.com/package/standard-version) for example.
+- `template`: string. Default [`<neutrino-webextension_root>/template.ejs`](./template.ejs). Path to a special template for html-webpack-plugin. You normally don't have to change this. The html-webpack-plugin can be configured through [web](https://github.com/neutrinojs/neutrino/blob/master/packages/web/README.md#preset-options) preset or other Neutrino presets that are based on web (e.g [react](https://github.com/neutrinojs/neutrino/blob/master/packages/react/README.md#advanced-configuration)). If you really need to replace the template, copy [template.ejs](./template.ejs) and make your own.
+- `setup`: string. Default empty. Path to a setup file for development which will run right after the fake WebExtension environment and before running other scripts including webextension-polyfill. Relative path is resolved relative to Neutrino `root` path. Here you can add other polyfills or play with the sinon-chrome stubs. If you think some of the fake values or functionalities should be added by default, please open a PR to [`webextensions-emulator`](https://github.com/crimx/webextensions-emulator).
 
 ## Entry Options
 
@@ -296,7 +297,5 @@ These are added to the manifest:
 If you don't use dynamic import skip this section.
 
 Native dynamic import is [buggy](https://bugzilla.mozilla.org/show_bug.cgi?id=1536094) in Firefox. A workaround is to write a postbuild script targeting only Firefox build. It should collect all the dynamic chunks and append them to every entries in htmls and the `manifest.json` script lists.
-
-~The addons-linter is also [making aggressive errors](https://github.com/mozilla/addons-linter/issues/2498) on dynamic import. A workaround is to just replace the the `import` with other name. Since all the dynamic chunks are loaded in Firefox the `import(script)` code will not be run.~
 
 See [real-life example](https://github.com/crimx/ext-saladict/blob/dev/scripts/firefox-fix.js).
