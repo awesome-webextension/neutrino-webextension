@@ -284,7 +284,7 @@ Behind the scene whenever webpack finishes bundling, it opens a special url in t
 
 In order to redirect web requests and reload itself, additional files and permissions are added to the extension. Do not run `--livereload` in production.
 
-These are added to to the manifest:
+These are added to the manifest:
 
 - Web requests related permissions.
 - Browsing data permission (for removing special page history).
