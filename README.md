@@ -232,7 +232,7 @@ Use [`sinon-chrome`](https://github.com/acvetkov/sinon-chrome) which supports Ch
 
 All options are optional.
 
-- `polyfill`: boolean or string. Default `false`. Generate polyfill related configs. If `true` the `webextension-polyfill` should be installed. You can also provide path to a custom polyfill file.
+- `polyfill`: boolean or string. Default `false`. Generate polyfill related configs. If `true` the `webextension-polyfill` should be installed. You can also provide path to a custom polyfill file. If you already import `webextension-polyfill` in your code, you can set this option to false.
 - `removePolyfillSourcemap`: boolean. Default `true` on production. Remove link to source map in `webextension-polyfill`.
 - `manifest`: string. Default `'<neutrino.options.root>/src/manifest/'`. Extension manifests directory.
   - This directory should have at least a `[browser].manifest.(json|js)` (e.g. `firefox.manifest.json`). This preset will read the manifest directory to get browser names and generate outputs respectively.
