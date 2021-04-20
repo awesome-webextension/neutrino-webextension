@@ -39,7 +39,7 @@ describe('webpack', () => {
           index: {
             entry: 'index',
             webext: {
-              type: 'browser_action',
+              type: 'action',
               setup: '/entry-setup-path'
             }
           }
@@ -62,7 +62,7 @@ describe('webpack', () => {
           index: {
             entry: 'index',
             webext: {
-              type: 'browser_action',
+              type: 'action',
               setup: 'entry-setup-path'
             }
           }
@@ -175,7 +175,7 @@ function optionsFixture () {
       popup: {
         entry: 'popup',
         webext: {
-          type: 'browser_action'
+          type: 'action'
         }
       },
       page: {

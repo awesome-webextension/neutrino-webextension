@@ -21,7 +21,7 @@ module.exports = {
       popup: {
         entry: 'src/popup',
         webext: {
-          type: 'browser_action'
+          type: 'action'
         }
       },
       content1: {
