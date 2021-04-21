@@ -1,4 +1,4 @@
-const WexExtManifestPlugin = require('../../lib/WexExtManifestPlugin')
+const WexExtManifestPlugin = require('../../../lib/WexExtManifestPlugin')
 const fse = require('fs-extra')
 const path = require('path')
 const merge = require('deepmerge')

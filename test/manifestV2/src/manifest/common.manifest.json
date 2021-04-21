@@ -1,0 +1,13 @@
+{
+  "manifest_version": 2,
+  "name": "extension_name",
+  "short_name": "extension_short_name",
+  "description": "extension_description",
+  "web_accessible_resources": [
+    "assets/*"
+  ],
+  "permissions": [
+    "<all_urls>",
+    "storage"
+  ]
+}

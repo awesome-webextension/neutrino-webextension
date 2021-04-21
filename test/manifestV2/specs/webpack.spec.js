@@ -1,7 +1,7 @@
 const _ = require('lodash')
 const Neutrino = require('neutrino/Neutrino')
 const react = require('@neutrinojs/react')
-const webext = require('../../lib')
+const webext = require('../../../lib')
 
 describe('webpack', () => {
   const NODE_ENV = process.env.NODE_ENV
@@ -39,7 +39,7 @@ describe('webpack', () => {
           index: {
             entry: 'index',
             webext: {
-              type: 'action',
+              type: 'browser_action',
               setup: '/entry-setup-path'
             }
           }
@@ -62,7 +62,7 @@ describe('webpack', () => {
           index: {
             entry: 'index',
             webext: {
-              type: 'action',
+              type: 'browser_action',
               setup: 'entry-setup-path'
             }
           }
@@ -175,7 +175,7 @@ function optionsFixture () {
       popup: {
         entry: 'popup',
         webext: {
-          type: 'action'
+          type: 'browser_action'
         }
       },
       page: {

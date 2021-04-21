@@ -1,6 +1,6 @@
 const standard = require('@neutrinojs/standardjs')
 const react = require('@neutrinojs/react')
-const webext = require('../../lib')
+const webext = require('../../../lib')
 const neutrino = require('neutrino')
 
 describe('eslintrc', () => {
