@@ -256,8 +256,43 @@ Entry options can be configured through `options.mains.[entry].webext`. All are 
   - `'pageless'`: Generate normal output without html. No manifest configuration.
   - Others: Generate normal output with or without html. Configure manifest according to the [docs](https://developer.mozilla.org/en-US/docs/Mozilla/Add-ons/WebExtensions/manifest.json).
   - Except `'page'`, `'pageless'` and `'content_scripts'` other entry types should be one and only.
+  - `'browser_action'` and `'page_action'` are merged in to `'action'` for manifest v3.
 - `webext.manifest`: object. Other manifest options for this field. See example above.
 - `webext.setup`: string. Default empty. Path to a setup file which will run right before this entry on development mode. Relative path is resolved relative to Neutrino `source` path.
+
+## Handling multiple presets
+
+By default neutrino will use your preset in `.neutrinorc.js`. Then in your `webpack.config.js` you can simply call neutrino preset this way:
+
+```js
+module.exports = require('neutrino')().webpack()
+```
+
+Webpack is able to launch multiple builds (for instance if you have two extenions or are building manifest v2 and v3) by exporting an array of builds.
+Also, you can specify to neutrino the preset object you want to use.
+
+```js
+const neutrino = require('neutrino');
+
+const presets1 = require('./neutrino-conf-1.js');
+const presets2 = require('./neutrino-conf-2.js');
+
+const build1 = neutrino(presets1).webpack();
+const build2 = neutrino(presets2).webpack();
+
+module.exports = [
+  build1,
+  build2
+];
+```
+
+## Migrating from Manifest v2 to v3
+
+Google is pushing the use of Manifest v3 that brings lot of new changes to extensions. Hopefully, `neutrino-webextension` is compatible.
+
+In [this documentation](https://developer.chrome.com/docs/extensions/mv3/intro/mv3-migration/) you will be guided through the differences between v2 and v3. We also recommend you to take a look at the [migration checklist](https://developer.chrome.com/docs/extensions/mv3/mv3-migration-checklist/) to make sure you didn't miss any change impacting your extension.
+
+As Firefox is not handling manifest v3 as of today, take a look at the paragraph "Handling multiple presets" to see how to build both manifest version at the same time.
 
 ## Debug Mode
 
