@@ -1,5 +1,5 @@
 /**
- * For testing only MANIFEST V3
+ * For testing only MANIFEST V2
  */
 
 const standard = require('@neutrinojs/standardjs');
@@ -9,8 +9,8 @@ const webext = require('./lib');
 
 module.exports = {
   options: {
-    source: 'test/manifestV3',
-    output: 'build/v3',
+    source: 'test/manifestV2',
+    output: 'build/v2',
     mains: {
       background: {
         entry: 'src/background',
@@ -22,7 +22,7 @@ module.exports = {
       popup: {
         entry: 'src/popup',
         webext: {
-          type: 'action'
+          type: 'browser_action'
         }
       },
       content1: {
@@ -63,8 +63,8 @@ module.exports = {
     }),
     webext({
       polyfill: true,
-      manifest: 'test/manifestV3/src/manifest',
+      manifest: 'test/manifestV2/src/manifest',
       setup: 'test/setup'
     })
-  ]  
+  ]
 };

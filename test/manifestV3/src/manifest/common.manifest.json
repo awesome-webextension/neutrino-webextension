@@ -1,0 +1,17 @@
+{
+  "manifest_version": 3,
+  "name": "extension_name",
+  "short_name": "extension_short_name",
+  "description": "extension_description",
+  "web_accessible_resources": [{
+    "resources": ["assets/*"],
+    "matches": [],
+    "extension_ids": []
+   }],
+  "permissions": [
+    "storage"
+  ],
+  "host_permissions": [
+    "<all_urls>"
+  ]
+}

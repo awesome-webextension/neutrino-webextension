@@ -1,4 +1,4 @@
-const WexExtManifestPlugin = require('../../lib/WexExtManifestPlugin')
+const WexExtManifestPlugin = require('../../../lib/WexExtManifestPlugin')
 const fse = require('fs-extra')
 const path = require('path')
 const merge = require('deepmerge')
@@ -58,7 +58,7 @@ describe('WexExtManifestPlugin', () => {
     jest.doMock(
       path.resolve(options.manifest, 'common.manifest'),
       () => ({
-        mainfest_version: 2,
+        manifest_version: 3,
         name: 'name_from_common',
         short_name: 'short_name_from_common',
         description: 'description_from_common'
@@ -68,19 +68,16 @@ describe('WexExtManifestPlugin', () => {
     jest.doMock(
       path.resolve(options.manifest, 'chrome.manifest'),
       () => ({
-        mainfest_version: 2,
+        manifest_version: 3,
         short_name: 'short_name_from_chrome',
-        description: 'description_from_chrome',
-        background: {
-          persistent: false
-        }
+        description: 'description_from_chrome'
       }),
       { virtual: true }
     )
     jest.doMock(
       path.resolve(options.manifest, 'firefox.manifest'),
       () => ({
-        mainfest_version: 2,
+        manifest_version: 3,
         description: 'description_from_firefox'
       }),
       { virtual: true }
@@ -131,14 +128,9 @@ describe('WexExtManifestPlugin', () => {
     
     expect(vfs[path.join(neutrinoOpts.output, 'chrome/manifest.json')]).toEqual({
       background: {
-        persistent: false,
-        scripts: [
-          'assets/browser-polyfill.min.js',
-          'common.js',
-          'background.js'
-        ]
+        service_worker: 'background.js'
       },
-      browser_action: {
+      action: {
         default_popup: 'popup.html'
       },
       content_scripts: [
@@ -156,7 +148,7 @@ describe('WexExtManifestPlugin', () => {
       ],
       options_page: 'options_page.html',
       description: 'description_from_chrome',
-      mainfest_version: 2,
+      manifest_version: 3,
       name: 'name_from_common',
       short_name: 'short_name_from_chrome',
       version: '1.0.0'
@@ -164,13 +156,9 @@ describe('WexExtManifestPlugin', () => {
     
     expect(vfs[path.join(neutrinoOpts.output, 'firefox/manifest.json')]).toEqual({
       background: {
-        scripts: [
-          'assets/browser-polyfill.min.js',
-          'common.js',
-          'background.js'
-        ]
+        service_worker: 'background.js'
       },
-      browser_action: {
+      action: {
         default_popup: 'popup.html'
       },
       content_scripts: [
@@ -188,7 +176,7 @@ describe('WexExtManifestPlugin', () => {
       ],
       options_page: 'options_page.html',
       description: 'description_from_firefox',
-      mainfest_version: 2,
+      manifest_version: 3,
       name: 'name_from_common',
       short_name: 'short_name_from_common',
       version: '1.0.0'
@@ -205,7 +193,7 @@ describe('WexExtManifestPlugin', () => {
     ;['common', 'chrome', 'firefox'].forEach(name => {
       jest.doMock(
         path.resolve(options.manifest, `${name}.manifest`),
-        () => ({}),
+        () => ({ manifest_version: 3 }),
         {
           virtual: true
         }
@@ -254,9 +242,9 @@ describe('WexExtManifestPlugin', () => {
     
     expect(vfs[path.join(neutrinoOpts.output, 'chrome/manifest.json')]).toEqual({
       background: {
-        scripts: ['common.js', 'background.js']
+        service_worker: 'background.js'
       },
-      browser_action: {
+      action: {
         default_popup: 'popup.html'
       },
       content_scripts: [
@@ -275,14 +263,15 @@ describe('WexExtManifestPlugin', () => {
       options_ui: {
         page: 'options_ui.html'
       },
-      version: '1.0.0'
+      version: '1.0.0',
+      manifest_version: 3
     })
     
     expect(vfs[path.join(neutrinoOpts.output, 'firefox/manifest.json')]).toEqual({
       background: {
-        scripts: ['common.js', 'background.js']
+        service_worker: 'background.js'
       },
-      browser_action: {
+      action: {
         default_popup: 'popup.html'
       },
       content_scripts: [
@@ -301,7 +290,8 @@ describe('WexExtManifestPlugin', () => {
       options_ui: {
         page: 'options_ui.html'
       },
-      version: '1.0.0'
+      version: '1.0.0',
+      manifest_version: 3
     })
   })
 })
@@ -351,7 +341,7 @@ function optionsFixture () {
       popup: {
         entry: 'popup',
         webext: {
-          type: 'browser_action'
+          type: 'action'
         }
       },
       page: {
