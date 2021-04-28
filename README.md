@@ -327,6 +327,8 @@ These are added to the manifest:
 - Livereload assets are added to web accessible resources.
 - Background page becomes persistent.
 
+Live reloading is not compatible with Manifest v3.
+
 ## Caveats
 
 If you don't use dynamic import skip this section.
